@@ -13,8 +13,15 @@ module Exercise
         count.inject(:+) / count.length
       end
 
-      def chars_count(_films, _threshold)
-        
+      def chars_count(films, threshold)
+        count = films.map do |film|
+          next unless !film['rating_kinopoisk'].nil? && film['rating_kinopoisk'].to_f >= threshold
+
+          film['name'].chars.select do |char|
+            char == 'и'
+          end.length
+        end.compact
+        count.inject(:+)
       end
     end
   end

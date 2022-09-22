@@ -11,11 +11,12 @@ module Exercise
         return -1 if low > high
 
         middle = (low + high) / 2
-        if array[middle] == query
+        case array[middle] <=> query
+        when 0
           middle
-        elsif query < array[middle]
+        when 1
           search(array, query, low, middle - 1)
-        else
+        when -1
           search(array, query, middle + 1, high)
         end
       end

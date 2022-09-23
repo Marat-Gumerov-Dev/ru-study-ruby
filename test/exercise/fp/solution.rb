@@ -14,15 +14,9 @@ module Exercise
       end
 
       def chars_count(films, threshold)
-        filtered = films.reject { |film| film['rating_kinopoisk'].nil? }
-                        .select { |film| film['rating_kinopoisk'].to_f >= threshold }
         count = films.map do |film|
-          
-          next unless !film['rating_kinopoisk'].nil? && film['rating_kinopoisk'].to_f >= threshold
-
-          film['name'].chars.select do |char|
-            char == 'и'
-          end.length
+          film['name'].chars.select { |char| char == 'и' }.size if film['rating_kinopoisk'].nil? &&
+                                                                   film['rating_kinopoisk'].to_f >= threshold
         end.compact
         count.inject(:+)
       end

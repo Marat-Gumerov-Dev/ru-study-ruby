@@ -8,17 +8,12 @@ module Exercise
       end
 
       def search(array, query, low = 0, high = array.size - 1)
-        return -1 if low > high
+        return -1 if !(array.include? query) || low > high
 
         middle = (low + high) / 2
-        case array[middle] <=> query
-        when 0
-          middle
-        when 1
-          search(array, query, low, middle - 1)
-        when -1
-          search(array, query, middle + 1, high)
-        end
+        return middle if array[middle] == query
+
+        array[middle] > query ? search(array, query, low, middle - 1) : search(array, query, middle + 1, high)
       end
     end
   end

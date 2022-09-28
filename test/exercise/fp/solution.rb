@@ -6,7 +6,7 @@ module Exercise
       # film["genres"], film["year"], film["access_level"], film["country"]
       def rating(array)
         filtered = array.collect do |film|
-          conditions_for_the_movie_are_valid?(film) ? film['rating_kinopoisk'].to_f : nil
+          valid_film?(film) ? film['rating_kinopoisk'].to_f : nil
         end.compact
         filtered.reduce(:+) / filtered.length
       end
@@ -19,7 +19,7 @@ module Exercise
 
       private
 
-      def conditions_for_the_movie_are_valid?(film)
+      def valid_film?(film)
         !film['country'].nil? && !film['rating_kinopoisk'].nil? &&
           film['country'].split(',').length > 1 && film['rating_kinopoisk'].to_f.positive?
       end

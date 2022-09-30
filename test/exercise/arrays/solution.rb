@@ -8,10 +8,7 @@ module Exercise
       end
 
       def search(array, query, low = 0, high = array.size - 1)
-        # ИЗ КОММИТА 4 дня назад который был сделан в строчке ниже
-        # КАК РАЗ ПРОВЕРЯЕТСЯ /if !(array & [query]).empty?/  
-        # ЕСТЬ ЛИ ЭЛЕМЕНТ В МАССИВЕ? И ЕСЛИ ЕСТЬ ТОГДА return -1
-        return -1 if !(array & [query]).empty? || low > high
+        return -1 if array[query] == query || low > high
 
         middle = (low + high) / 2
         return middle if array[middle] == query

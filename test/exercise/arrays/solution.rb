@@ -8,8 +8,9 @@ module Exercise
       end
 
       def search(array, query, low = 0, high = array.size - 1)
+        return - 1 if !array.index(query) || high < low
+
         mid = low + ((high - low) / 2)
-        return - 1 if high < low
         return mid if array[mid] == query
 
         query < array[mid] ? search(array, query, low, mid - 1) : search(array, query, mid + 1, high)

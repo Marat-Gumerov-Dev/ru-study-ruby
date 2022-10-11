@@ -13,6 +13,7 @@ module Exercise
         self
       end
 
+      # Написать свою функцию my_map
       def my_map(&block)
         MyArray.new(my_reduce([]) { |acc, element| acc << block.call(element) })
       end
@@ -23,7 +24,12 @@ module Exercise
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce; end
+      def my_reduce(acc = nil, &block)
+        return acc if size.zero?
+
+        acc = acc.nil? ? first : block.call(acc, first)
+        MyArray.new(self[1...size]).my_reduce(acc, &block)
+      end
     end
   end
 end

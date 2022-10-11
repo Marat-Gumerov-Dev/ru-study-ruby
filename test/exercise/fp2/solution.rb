@@ -13,10 +13,14 @@ module Exercise
         self
       end
 
-      def my_map; end
+      def my_map(&block)
+        MyArray.new(my_reduce([]) { |acc, element| acc << block.call(element) })
+      end
 
       # Написать свою функцию my_compact
-      def my_compact; end
+      def my_compact
+        MyArray.new(my_reduce([]) { |acc, el| el.nil? ? acc : acc << el })
+      end
 
       # Написать свою функцию my_reduce
       def my_reduce; end
